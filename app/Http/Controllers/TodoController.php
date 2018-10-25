@@ -30,11 +30,17 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255'
+            'name' => 'required|max:255',
+            'description' => 'required|max:255'
         ]);
 
         $todo = new Todo;
         $todo->name = $request->name;
+        $todo->description = $request->description;
+
+        if($request->completed == 'on'){
+            $todo->completed = 1;
+        }
 
         $todo->save();
 
@@ -62,10 +68,18 @@ class TodoController extends Controller
     public function update(Request $request, Todo $todo)
     {
         $this->validate($request, [
-            'name'=> 'required|min:5|max:255'
+            'name'=> 'required|max:255',
+            'description' => 'required|max:255'
         ]);
 
         $todo->name = $request->name;       
+        $todo->description = $request->description;
+
+        if($request->completed == 'on'){
+            $todo->completed = 1;
+        } else {
+            $todo->completed = 0;
+        }
 
         $todo->save();
 

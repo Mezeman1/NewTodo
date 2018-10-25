@@ -16,6 +16,18 @@
                             <div>{{ $todo->name }}</div>
                         </td>
 
+                        <td class="table-text">
+                            <div>{{ $todo->description }}</div>
+                        </td>
+
+                        <td class="table-text">
+                          @if($todo->completed)
+                            <div>Completed</div> 
+                          @else
+                            <div>Not Completed</div>  
+                          @endif
+                        </td>
+
                         <td>
                           <a href="{{ route('todos.edit', ['todo'=>$todo])}}" class="btn btn-success">Edit</a>
                         </td>
